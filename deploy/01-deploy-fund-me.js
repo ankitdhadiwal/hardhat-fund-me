@@ -1,6 +1,6 @@
 const { network } = require("hardhat")
-const { networkConfig, developmentChains } = require("../helper-hardhat-config.cjs")
-const { verify } = require("../utils/verify")
+const { networkConfig, developmentChains } = require("../helper-hardhat-config.js")
+const { verify } = require("../utils/verify.js")
 require("dotenv").config()
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
@@ -8,13 +8,19 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
 
+    console.log('Current Chain ID:', chainId);
+    console.log('Network Config:', networkConfig);
+
     let ethUsdPriceFeedAddress
-    if (chainId == 31337) {
-        const ethUsdAggregator = await deployments.get("MockV3Aggregator")
+    if (chainId == 1337) {
+        const ethUsdAggregator = await deployments.get("MockV3Aggregator");
         ethUsdPriceFeedAddress = ethUsdAggregator.address
+    } else if(networkConfig[chainId]){
+        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"];
     } else {
-        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+        throw new Error(`No price feed address found for chainId ${chainId}`);
     }
+
     log("----------------------------------------------------")
     log("Deploying FundMe and waiting for confirmations...")
     const fundMe = await deploy("FundMe", {

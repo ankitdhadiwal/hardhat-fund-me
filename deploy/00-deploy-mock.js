@@ -1,15 +1,5 @@
-// const {network } = require("hardhat")
-// const {developmentChains } = require("../helper-hardhat-config")
 
-// module.exports = async({getNamedAccounts, deployment}) => {
-//     const {deploy, log } = deployments
-//     const { deployer } = await getNamedAccounts()
-//     const chainId = network.config.chainId 
-    
-
-// }
-
-const {developmentChains } = require("../helper-hardhat-config")
+const {developmentChains } = require("../helper-hardhat-config.js")
 const { network } = require("hardhat")
 
 const DECIMALS = "8"

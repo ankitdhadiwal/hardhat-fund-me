@@ -1,6 +1,6 @@
 const { assert, expect } = require("chai")
 const { network, deployments, ethers } = require("hardhat")
-const { developmentChains } = require("../../helper-hardhat-config.cjs")
+const { developmentChains } = require("../../helper-hardhat-config.js")
 
 !developmentChains.includes(network.name)
     ? describe.skip
@@ -8,7 +8,7 @@ const { developmentChains } = require("../../helper-hardhat-config.cjs")
           let fundMe
           let mockV3Aggregator
           let deployer
-          const sendValue = ethers.utils.parseEther("1");
+          const sendValue = ethers.parseEther("1");
           beforeEach(async () => {
               // const accounts = await ethers.getSigners()
               // deployer = accounts[0]

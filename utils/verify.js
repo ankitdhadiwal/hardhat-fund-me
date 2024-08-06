@@ -4,7 +4,7 @@ const { ethers } = require("hardhat")
 const verify = async (contractAddress, args ) => {
     console.log(" Verifying Contracts...")
     try {
-        await run("verify: verify", {
+        await run("verify:verify", {
             address: contractAddress,
             constructorArguments: args,
         })
